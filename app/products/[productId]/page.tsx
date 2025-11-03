@@ -5,6 +5,14 @@ type Params = {
 }
 
 
+export function generateMetadata({params} : Params){
+    const productId = params.then(p => p.productId);
+    return {
+        title: `Product ${productId}`,
+        description: `This is the product page for product ${productId}`,
+    }
+}
+
 const page = async ({params}: Params) => {
     const productId = (await params).productId;
     if(parseInt(productId) > 1000){
