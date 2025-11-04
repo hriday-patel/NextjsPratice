@@ -1,25 +1,26 @@
+import { log } from "console";
 import { notFound } from "next/navigation";
+import { title } from "process";
 
 type Params = {
-    params: Promise<{ productId: string }>;
-}
+  params: Promise<{ productId: string }>;
+};
 
-
-export function generateMetadata({params} : Params){
-    const productId = params.then(p => p.productId);
-    return {
-        title: `Product ${productId}`,
-        description: `This is the product page for product ${productId}`,
-    }
-}
-
-const page = async ({params}: Params) => {
+export async function generateMetadata({ params }: Params) {
     const productId = (await params).productId;
-    if(parseInt(productId) > 1000){
-        notFound();
-    }
-  return (
-    <div>page {productId}</div>
-  )
+    return {
+      title: {
+        absolute: `Product ${productId} Page`,
+      },
+      description: `This is the product ${productId} page description`,
+    };
 }
-export default page
+
+const page = async ({ params }: Params) => {
+  const productId = (await params).productId;
+  if (parseInt(productId) > 1000) {
+    notFound();
+  }
+  return <div>page {productId}</div>;
+};
+export default page;
