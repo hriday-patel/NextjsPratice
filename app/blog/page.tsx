@@ -1,29 +1,11 @@
-import { JSX, lazy, Suspense } from "react";
-import styles from "./blog.module.css";
-import LineChart from "./line-chart";
-
-const Comp = lazy((): any => import("../_components/Component"));
-
-
-export const metadata = {
-  title: "Blog Page",
-  description: "This is the blog page description",
-}
-
-const page = () => {
+import Link from "next/link";
+const Page = () => {
   return (
-    <Suspense fallback={<Meow />}>
-      <Comp />
-      <LineChart />
-    </Suspense>
+    <div>
+      <Link href="/blog/firstblog">First Blog</Link>
+      <br />
+      <Link href="/blog/secondblog">Second Blog</Link>
+    </div>
   );
 };
-export default page;
-
-const Meow = () => {
-  return (
-    <>
-      <div className={styles.div}>page</div>
-    </>
-  );
-};
+export default Page;

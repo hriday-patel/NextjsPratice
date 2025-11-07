@@ -1,14 +1,11 @@
 import Header from "../_components/Header";
 import Footer from "../_components/Footer";
-const authLayout = ({ children }: { children: Readonly<React.ReactNode> }) => {
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html>
-      <body className="antialiased">
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <div>
+      {children}
+      <Footer />
+    </div>
   );
 };
-export default authLayout;
+export default layout;
