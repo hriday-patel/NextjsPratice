@@ -14,7 +14,7 @@ const error = ({ error, reset }: { error: Error; reset: () => void }) => {
   return (
     <div>
       <div>{error.message}</div>
-      <button onClick={reload}></button>
+      <button onClick={reload}>Reload</button>
     </div>
   );
 };

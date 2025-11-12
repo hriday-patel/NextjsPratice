@@ -1,23 +1,14 @@
-"use client";
 
-const ErrorSimulator = () => {
-  const getRandInt = () => {
-    return Math.floor(Math.random() * 2);
-  };
-
-  const getError = () => {
-    if (getRandInt() === 1) {
-      throw new Error("New Error");
-    }
-  };
-
-  return <button onClick={getError}>Click this button!</button>;
+const getRandInt = () => {
+  return Math.floor(Math.random() * 2);
 };
 
 const ErrorWrapper = ({ children }: { children: React.ReactNode }) => {
+  if(getRandInt() === 1){
+    throw new Error("Error Occurred");
+  }
   return (
     <div>
-      <ErrorSimulator />
       {children}
     </div>
   );
