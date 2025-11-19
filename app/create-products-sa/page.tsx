@@ -1,5 +1,7 @@
 
-import  { AddProduct } from "../utils/actions";
+
+import Button from "../_components/Button";
+import { AddProduct } from "../utils/actions";
 
 const page = () => {
   return (
@@ -58,9 +60,7 @@ const page = () => {
             placeholder="product description"
           ></textarea>
         </div>
-        <button className="w-3/5 mx-auto text-center px-4 py-1 rounded-md border border-neutral-700/25 bg-blue-500 text-white disabled:bg-gray-400">
-          Submit
-        </button>
+        <Button />
       </form>
     </div>
   );

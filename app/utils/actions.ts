@@ -11,5 +11,5 @@ export async function AddProduct(formData: FormData){
     const price = formData.get("price") as string;
     const desc = formData.get("desc") as string;
     await addProduct(name, parseInt(price), desc);
-    redirect("/products-db");
+    redirect("/products-db")
 }
