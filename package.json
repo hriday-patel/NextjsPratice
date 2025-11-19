@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.0.0",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.553.0",
     "motion": "^12.23.24",
@@ -23,6 +24,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
+    "prisma": "^7.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
