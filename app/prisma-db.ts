@@ -63,7 +63,7 @@ export const addProduct = async (
   price: number,
   description?: string
 ) => {
-  await new Promise((res) => setTimeout(res, 1500));
+  await new Promise((res) => setTimeout(res,5000));
   const newProducts = await prisma.product.create({
     data: { name, price, description },
   });

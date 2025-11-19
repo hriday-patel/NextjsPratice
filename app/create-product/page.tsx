@@ -17,7 +17,7 @@ const page = () => {
         price,
         description,
       };
-      const fetchData = await fetch("/create-product/api", {
+      const fetchData = await fetch("/productApi", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,9 +29,11 @@ const page = () => {
       }
     } catch (err) {
       console.error("error", err);
-    } finally {
       setLoading(false);
-    }
+      setName("")
+      setPrice("")
+      setDescription("");
+    } 
   };
   return (
     <div className="flex justify-center items-center h-screen">
