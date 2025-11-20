@@ -3,24 +3,24 @@
 import { addProduct } from "../prisma-db";
 import { redirect } from "next/navigation";
 export type FormState = {
-  name?: string;
-  price?: string;
-  description?: string;
-  errors: Errors
+  name: string;
+  price: string;
+  description: string;
+  count: number;
+  errors: Errors;
 };
 
 export type Errors = {
-    name?: string,
-    price?: string,
-    description?: string
-}
+  name?: string;
+  price?: string;
+  description?: string;
+};
 
-
-export async function AddProduct(prevState: FormState, formData: FormData) {
-  
+export async function AddProduct(prevState: FormState,formData: FormData) {
   const name = formData.get("name") as string;
   const price = formData.get("price") as string;
   const desc = formData.get("desc") as string;
+  const count = formData.get("count") as string;
 
   const errors: Errors = {};
 
@@ -35,7 +35,13 @@ export async function AddProduct(prevState: FormState, formData: FormData) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return {...prevState, errors} ;
+    return {
+      name,
+      price,
+      description: desc,
+      count: (parseInt(count) + 1).toString(),
+      errors,
+    };
   }
   await addProduct(name, parseInt(price), desc);
   redirect("/products-db");
