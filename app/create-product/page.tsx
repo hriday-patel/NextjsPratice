@@ -4,19 +4,26 @@ import { useState } from "react";
 
 const page = () => {
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [formdata, setFormData] = useState({
+    name: "",
+    price: "",
+    description: ""
+  })
   const router = useRouter();
+
+  const handleData = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        e.preventDefault();
+        setFormData({
+          ...formdata,
+          [e.target.name]: e.target.value
+        })
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const newData = {
-        name,
-        price,
-        description,
-      };
+      const newData = formdata;
       const fetchData = await fetch("/productApi", {
         method: "POST",
         headers: {
@@ -30,9 +37,11 @@ const page = () => {
     } catch (err) {
       console.error("error", err);
       setLoading(false);
-      setName("")
-      setPrice("")
-      setDescription("");
+      setFormData({
+        name: "",
+        price: "",
+        description: ""
+      })
     } 
   };
   return (
@@ -52,8 +61,9 @@ const page = () => {
             <input
               type="text"
               id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name="name"
+              value={formdata.name}
+              onChange={handleData}
               className="px-2 py-1 w-4/5 bg-slate-200 rounded-md outline-none"
               placeholder="product name"
               required
@@ -69,8 +79,9 @@ const page = () => {
             <input
               type="number"
               id="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              name="price"
+              value={formdata.price}
+              onChange={handleData}
               className="px-2 py-1 w-4/5 bg-slate-200 rounded-md outline-none"
               placeholder="0"
               required
@@ -89,10 +100,11 @@ const page = () => {
             <textarea
               id="desc"
               rows={5}
+              name="description"
               className="resize-none px-2 py-1 w-4/5 bg-slate-200 rounded-md outline-none"
-              value={description}
+              value={formdata.description}
               placeholder="product description"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={handleData}
             >
             </textarea>
           </div>
