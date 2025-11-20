@@ -1,5 +1,28 @@
-[
-  { "name": "Product 1", "price": 500, "description": "Description 1" },
-  { "name": "Product 2", "price": 700, "description": "Description 2" },
-  { "name": "Product 3", "price": 1000, "description": "Description 3" }
-]
+{
+  "data": [
+    {
+      "name": "Product 1",
+      "price": 500,
+      "description": "Description 1",
+      "id": "1"
+    },
+    {
+      "name": "Product 2",
+      "price": 700,
+      "description": "Description 2",
+      "id": "2"
+    },
+    {
+      "name": "Product 3",
+      "price": 1000,
+      "description": "Description 3",
+      "id": "3"
+    },
+    {
+      "id": "4",
+      "name": "Raju",
+      "price": 69,
+      "description": "hcuhur"
+    }
+  ]
+}

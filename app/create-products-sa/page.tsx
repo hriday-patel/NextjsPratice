@@ -38,12 +38,12 @@ const page = () => {
             id="name"
             name="name"
             onChange={(e) => setName(e.target.value)}
-            defaultValue={state.name}
+            value={name}
             className="px-2 py-1 w-4/5 bg-slate-200 rounded-md outline-none"
             placeholder="product name"
 
           />
-          {state.errors.name && (
+          {!isPending && state.errors.name && (
             <div className="text-red-500 text-sm">{state.errors.name}</div>
           )}
         </div>
@@ -58,12 +58,12 @@ const page = () => {
             type="number"
             id="price"
             name="price"
-            defaultValue={state.price}
+            value={price}
             onChange={(e) => setPrice(e.target.value)}
             className="px-2 py-1 w-4/5 bg-slate-200 rounded-md outline-none"
             placeholder="0"
           />
-          {state.errors.price && (
+          {!isPending && state.errors.price && (
             <div className="text-red-500 text-sm">{state.errors.price}</div>
           )}
         </div>
@@ -79,14 +79,14 @@ const page = () => {
           </label>
           <textarea
             id="desc"
-            defaultValue={state.description}
+            value={description}
             onChange={(e) => setDesc(e.target.value)}
             rows={5}
             name="desc"
             className="resize-none px-2 py-1 w-4/5 bg-slate-200 rounded-md outline-none"
             placeholder="product description"
           ></textarea>
-          {state.errors.description && (
+          {!isPending && state.errors.description && (
             <div className="text-red-500 text-sm">{state.errors.description}</div>
           )}
         </div>

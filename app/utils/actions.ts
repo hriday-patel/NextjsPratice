@@ -17,6 +17,7 @@ export type Errors = {
 
 
 export async function AddProduct(prevState: FormState, formData: FormData) {
+  
   const name = formData.get("name") as string;
   const price = formData.get("price") as string;
   const desc = formData.get("desc") as string;
