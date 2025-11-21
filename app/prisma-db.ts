@@ -48,7 +48,7 @@ export const updateProduct = async (
   id: number,
   name: string,
   price: number,
-  description?: string
+  description: string
 ) => {
   await new Promise((res) => setTimeout(res, 1500));
   const updateProducts = await prisma.product.update({
@@ -61,7 +61,7 @@ export const updateProduct = async (
 export const addProduct = async (
   name: string,
   price: number,
-  description?: string
+  description: string
 ) => {
   await new Promise((res) => setTimeout(res,5000));
   const newProducts = await prisma.product.create({

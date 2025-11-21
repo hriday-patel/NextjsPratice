@@ -1,19 +1,26 @@
 "use client";
 
-import { useActionState, useState } from "react";
-import Button from "../_components/Button";
-import { AddProduct } from "../utils/actions";
-import { FormState } from "../utils/actions";
+import { useActionState } from "react";
+import { EditProduct} from "@/app/utils/actions";
+import { FormState } from "@/app//utils/actions";
 
-const page = () => {
+type Product = {
+    id: number,
+    name: string,
+    price: number,
+    description: string | null
+}
+
+const EditForm = ({product}: {product: Product}) => {
   const initialState: FormState = {
-    name: "",
-    price: "",
-    description: "",
+    name: product.name,
+    price: product.price.toString(),
+    description: product.description || "",
     errors: {},
   };
+  const updateProduct = EditProduct.bind(null, product.id);
   const [state, formAction, isPending] = useActionState(
-    AddProduct,
+    updateProduct,
     initialState
   );
   return (
@@ -91,8 +98,9 @@ const page = () => {
         >
           {isPending ? "Submitting..." : "Submit"}
         </button>
+        {/* <input type="hidden" name="id" value={id} /> */}
       </form>
     </div>
   );
 };
-export default page;
+export default EditForm;
