@@ -1,7 +1,9 @@
 "use server";
 
-import { addProduct, updateProduct } from "../prisma-db";
+import { addProduct, deleteProduct, updateProduct } from "../prisma-db";
 import { redirect } from "next/navigation";
+import { revalidate } from "../time/route";
+import { revalidatePath } from "next/cache";
 export type FormState = {
   name: string;
   price: string;
@@ -9,8 +11,9 @@ export type FormState = {
   errors: Errors;
 };
 
-
-
+export type SingleError = {
+  message?: string;
+};
 
 export type Errors = {
   name?: string;
@@ -18,7 +21,7 @@ export type Errors = {
   description?: string;
 };
 
-export async function AddProduct(prevState: FormState,formData: FormData) {
+export async function AddProduct(prevState: FormState, formData: FormData) {
   const name = formData.get("name") as string;
   const price = formData.get("price") as string;
   const desc = formData.get("desc") as string;
@@ -47,7 +50,11 @@ export async function AddProduct(prevState: FormState,formData: FormData) {
   redirect("/products-db");
 }
 
-export async function EditProduct(id:number, prevState: FormState, formData: FormData){
+export async function EditProduct(
+  id: number,
+  prevState: FormState,
+  formData: FormData
+) {
   const name = formData.get("name") as string;
   const price = formData.get("price") as string;
   const desc = formData.get("desc") as string;
@@ -73,22 +80,12 @@ export async function EditProduct(id:number, prevState: FormState, formData: For
       errors,
     };
   }
-  await updateProduct(id , name, parseInt(price), desc);
+  await updateProduct(id, name, parseInt(price), desc);
   redirect("/products-db");
 }
 
-// <svg
-//             xmlns="http://www.w3.org/2000/svg"
-//             fill="none"
-//             viewBox="0 0 24 24"
-//             strokeWidth={2}
-//             stroke="currentColor"
-//             className="w-4 h-4"
-//           >
-//             <path
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//               d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-//               className="rotate-90"
-//             />
-//           </svg>
+
+export async function deletePro(id:number){
+      await deleteProduct(id);
+      revalidatePath('/products-db')
+}

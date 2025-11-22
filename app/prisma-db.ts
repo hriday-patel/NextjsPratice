@@ -22,8 +22,18 @@ const seeding = async () => {
 
 seeding();
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (query? : string) => {
   await new Promise((res) => setTimeout(res, 1500));
+  if(query) {
+    return prisma.product.findMany({
+      where: {
+        OR : [
+          {name: {contains: query}},
+          {description: {contains: query}}
+        ]
+      }
+    })
+  }
   const getAllProducts = await prisma.product.findMany();
   return getAllProducts;
 };
